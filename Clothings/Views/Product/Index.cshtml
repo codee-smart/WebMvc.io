@@ -1,0 +1,57 @@
+﻿@model List<Clothings.Models.Product>
+@{
+    // Create a dictionary to map type values to names
+    var typeDictionary = new Dictionary<int, string>
+    {
+        { 1, "veg" },
+        { 2, "Non-Veg" },
+        { 3, "None" }
+    };
+}
+<div class="container-fluid" style="background-color:lightgoldenrodyellow;">
+<h2 class="text-center mb-5 text-success border-bottom border-danger" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Menu</h2>
+
+<div class="row mb-5">
+    <div class="col">
+        <a class="btn btn-success" asp-controller="Product" asp-action="Create">Add Items</a>
+    </div>
+
+    <div class="col">
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr class="table-danger">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Added At</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody class="table-primary">
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Type</td>
+                <td>@product.Category?.Name</td>
+                <td>@product.Price</td>
+                <td><img src="/products/@product.ImageFileName" width="100" /></td>
+                <td>@product.CreatedAt.ToString("MM/dd/yyyy")</td>
+                <td style="white-space:nowrap">
+                    <a class="btn btn-primary btn-sm" asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" onclick="return confirm('Are you sure ?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

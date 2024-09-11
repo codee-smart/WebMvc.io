@@ -1,0 +1,63 @@
+﻿@model Clothings.Models.EmployeeVM
+@{
+}
+
+<div class="row">
+    <div class="col-md-8 mx-auto rounded border p-3 border border-success" style="background-color:linen">
+        <h2 class="text-center mb-5 text-success" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Add Employee</h2>
+
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label"><strong>Name :</strong></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Name">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label"><strong>Job Description :</strong></label>
+                <div class="col-lg-4 col-md-4 col-sm-12 pb-2">
+                    <select class="form-control" asp-for="JobDescription" asp-items="Model.EmpTypesList"></select>
+                    <span asp-validation-for="JobDescription" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label"><strong>Phone Number :</strong></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="PhoneNumber">
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label"><strong>Email Address :</strong></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="EmailAddress">
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label"><strong>Salary :</strong></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="salary">
+                    <span asp-validation-for="salary" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="offset-sm-4 col-sm-4 d-grid">
+                    <button type="submit" class="btn btn-success">Add</button>
+                </div>
+                <div class="col-sm-4 d-grid">
+                    <a class="btn btn-outline-primary" asp-controller="Employee" asp-action="Index" role="button">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@model List<Clothings.Models.Employee>
+@{
+    // Create a dictionary to map type values to names
+    var EmptypeDictionary = new Dictionary<int, string>
+    {
+        { 1, "Chef" },
+        { 2, "Waiter" },
+        { 3, "Security Staff" },
+        { 4, "Cleaning Staff" },
+        { 5, "Others" }
+    };
+}
+<div class="container-fluid" style="background-color:lightgoldenrodyellow;">
+    <h2 class="text-center mb-5 text-success border-bottom border-danger" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">List of Employees</h2>
+
+    <div class="row mb-5">
+        <div class="col">
+            <a class="btn btn-success" asp-controller="Employee" asp-action="Create">Add Employee</a>
+        </div>
+
+        <div class="col">
+        </div>
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr class="table-danger">
+                <th>ID</th>
+                <th>Name</th>
+                <th>JobDescription</th>
+                <th>PhoneNumber</th>
+                <th>EmailAddress</th>
+                <th>Salary</th>
+                <th>Joining Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody class="table-primary">
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>@employee.Id</td>
+                    <td>@employee.Name</td>
+                    <td>@employee.JobDescription</td>
+                    <td>@employee.PhoneNumber</td>
+                    <td>@employee.EmailAddress</td>
+                    <td>@employee.salary</td>
+                    <td>@employee.JoiningDate.ToString("MM/dd/yyyy")</td>
+                    <td style="white-space:nowrap">
+                        <a class="btn btn-primary btn-sm" asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id">Edit</a>
+                        <a class="btn btn-danger btn-sm" asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.Id" onclick="return confirm('Are you sure ?')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

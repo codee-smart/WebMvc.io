@@ -1,0 +1,78 @@
+﻿@model Clothings.Models.OrderVM
+
+<div class="container border-bottom border-danger text-success"
+     style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;background-color:antiquewhite">
+    <h2>Order Details</h2>
+</div>
+<br>
+<div class="row">
+    <!-- Left Column: Customer Details -->
+    <div class="col-md-6 border border-success" style="background-color:lavenderblush">
+        <form asp-action="OrderDetailPreview" method="post">
+            <div class="text-success" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><h3>Customer Details</h3></div>
+            <div class="form-group">
+                <label asp-for="CustomerName"></label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingAddress"></label>
+                <input asp-for="ShippingAddress" class="form-control" />
+                <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <!-- Button to submit the form -->
+            <button type="submit" class="btn btn-primary mt-3">Submit Order</button>
+            @{
+                var showSuccessPopup = TempData["OrderSuccess"] != null && (bool)TempData["OrderSuccess"];
+            }
+
+            @if (showSuccessPopup)
+            {
+                <script>
+                    // Show a success popup after the order is placed
+                    window.onload = function () {
+                        alert("Order placed successfully!");
+                    };
+                </script>
+            }
+            <br>
+        </form>
+        <br>
+    </div>
+
+    <!-- Right Column: Order Details -->
+    <div class="col-md-6">
+        <div class="text-success" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><h3>Order Items</h3></div>
+        <table class="table">
+            <thead>
+                <tr class="table-danger">
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CartItems)
+                {
+                    <tr class="table-primary">
+                        <td>@item.product.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@(item.Quantity * item.product.Price)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br>
+        <h4 class="text-end text-danger" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Total Amount: @Model.TotalAmount</h4>
+    </div>
+</div>
